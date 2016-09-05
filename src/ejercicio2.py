@@ -1,33 +1,40 @@
+#!/usr/bin/env python2
 import sys
 import math
-from scapy.all import * 
-def monitor_callback(pkt):
-  print printpkt.show()
-
-
-s_broadcast = 0
-s_unicast = 0
-total = 0
+from scapy.all import *
 
 fuente = {}
 cantidad = 0
 
-if len(sys.argv) > 1:
-	a=rdpcap(sys.argv[1])
-	for x in a:
-		if ARP in x and x.op == 0:  # x.op == 0 sii x es un is at
-			s = x.src
-			if s in fuente:
-				fuente[s] += 1
-			else:
-				fuente[s] = 1
-			cantidad+=1
+def packet_callback(pkt):
+  global fuente, cantidad
+  if ARP in pkt and pkt[ARP].op == 1:  # x.op == 0 sii x es un is at
+    s = pkt.src
+    if s in fuente:
+      fuente[s] += 1
+    else:
+      fuente[s] = 1
+    cantidad+=1
+
+try:
+  if len(sys.argv) > 1:
+    a=rdpcap(sys.argv[1])
+    for x in a:
+      packet_callback(x)
+  else:
+    print "Si deseas parar, apreta Ctrl-C."
+    sniff(prn=packet_callback, store=0)
+except KeyboardInterrupt:
+  print "Terminando..."
+
 
 for a in fuente:
-	fuente[a] = float(fuente[a]) / cantidad
+  fuente[a] = float(fuente[a]) / cantidad
 
 entropia = sum([-math.log(fuente[a], 2)*fuente[a] for a in fuente])
+print 'Fuente:', fuente
+print 'Entropia:', entropia
 
 for a in fuente: # chequeamos si es distinguido
-	if -math.log(fuente[a], 2) < entropia:
-		print a
+  if -math.log(fuente[a], 2) <= entropia:
+    print 'Nodo distinguido:', a
