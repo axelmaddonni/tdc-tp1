@@ -23,5 +23,7 @@ Busquen ahí dónde aparece su interfaz. Nombre clásico de ethernet: eth1/eno1,
 
 Después corran el wireshark con esa interfaz. Dejenlo corriendo un rato largo (mínimo 10 minutos, pero habian dicho que horas es lo mejor). Después guarden el resultado con formato Wireshark/tcpdump/.
 
+Capaz les convenga guardar solo los paquetes ARP (escribiendo "arp" en la barra de filtrado, y despues "File -> Export specified packages").
+
 Después corran las herramientas para analizar el resultado.
 
