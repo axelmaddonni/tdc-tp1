@@ -1,0 +1,141 @@
+\documentclass[%
+	%draft,
+	%submission,
+	%compressed,
+	final, %technote,
+	%internal,
+	%submitted,
+	%inpress,
+	%reprint,
+	% %titlepage,
+	notitlepage,
+	%anonymous,
+	narroweqnarray,
+	inline,
+	twoside,
+        %invited,
+	]{ieee}
+
+
+\usepackage[latin1]{inputenc}			% idioma
+\usepackage[spanish]{babel}
+%\usepackage{color}
+%\usepackage{colortbl}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{verbatim}
+
+\usepackage{hyperref}				% urls
+
+% -------- PARA FIGURAS
+\usepackage{graphicx}
+%\usepackage{capt-of}
+% -------- FIN FIGURAS
+
+% -------- PARA MONXTRAR EL CODIGO DE MANERA AMENA
+\usepackage{courier}
+\usepackage{listings}
+\lstset{ %
+	language=C++,                % choose the language of the code
+	basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+	numbersep=5pt,                  % how far the line-numbers are from the code
+%	backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,           % adds a frame around the code
+	tabsize=6,          % sets default tabsize to 2 spaces
+	captionpos=b,           % sets the caption-position to bottom
+	breaklines=true,        % sets automatic line breaking
+	breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+}
+% -------- FIN CODIGO
+
+\hypersetup{			%sacar los colores horrendos de las ref
+	colorlinks=false,
+	pdfborder={0 0 0},
+}
+
+
+\begin{document}
+
+
+\title[Wiretapping de paquetes ARP]{%
+	Wiretapping de paquetes ARP: analizando redes locales usando Teor\'ia de la Informaci\'on
+}
+
+\author[CIRUELOS, MADDONI, PATAN\'E]{
+Gonzalo Ciruelos \authorinfo{G. Ciruelos e-mail: gonzalo.ciruelos@gmail.com},
+\and{}Axel Maddonni\authorinfo{A. Maddonni, e-mail: axel.maddonni@gmail.com}%
+\and{}y Federico Patan\'e\authorinfo{F. Patan\'e, e-mail: fedepatane20@gmail.com}
+}
+
+\journal{Teor\'ia de las Comunicaciones, Departamento de Computaci\'on, Universidad de Buenos Aires}
+
+\firstpage{1}
+
+\maketitle               
+
+
+\begin{abstract} 
+Con el objetivo de comprender diversos aspectos de una red local, nos planeteamos analizar sus paquetes ARP usando herramientas de la teor\'ia de la informaci\'on.
+Para lograr eso, modelamos alg\'un aspecto de nuestra red como una fuente de inforamci\'on, de manera de poder analizarla con las herramientas previamente dichas.
+Adem\'as, comparamos distintos tipos de redes para poder confirmar o refutar nuestras hip\'otesis generales.
+\end{abstract}
+
+\begin{keywords}
+ARP, LAN, broadcast, unicast, entrop\'ia, informaci\'on, Ethernet, Wi-Fi
+\end{keywords}
+
+
+% \input{introduccion.tex}
+
+% \input{desarrollo.tex}
+
+% \input{resultados.tex}
+
+% \input{discusion.tex}
+
+% \input{conclusion.tex}
+
+%----------------------------------------------------------------------
+
+\begin{thebibliography}{1}
+
+%\bibitem{enunciado}
+%C\'atedra de Teor\'ia de las Comunicaciones\\
+%\newblock {\em Primer trabajo pr\'actico}\\
+%\newblock Primer cuatrimestre $2013$
+
+%\bibitem{arp}
+%RFC 826 - Ethernet Address Resolution Protocol\\
+%\url{http://tools.ietf.org/html/rfc826}\\
+%\newblock C. Plummer $1982$
+
+%\bibitem{conflicto}
+%RFC 5227 - IPv4 Address Conflict Detection\\
+%\url{http://tools.ietf.org/html/rfc3927}\\
+%\newblock S. Cheshire $2008$
+
+%\bibitem{link}
+%RFC 3927 - Configuration of IPv4 Link-Local Addresses\\
+%\url{http://tools.ietf.org/html/rfc3927}\\
+%\newblock Cheshire, et al. $2005$
+
+%\bibitem{patente}
+%Method and apparatus for detecting a router that improperly responds to ARP requests\\
+%\newblock US 7729292 B2\\
+%\url{http://www.google.com/patents/US7729292}\\
+%\newblock Stuart D. Cheshire y Joshua V. Graessley
+
+\bibitem{scapy}
+\url{http://www.secdev.org/projects/scapy}
+
+%\bibitem{tcp}
+%\url{http://www.tcpdump.org}
+
+\end{thebibliography}
+
+
+\end{document}
+

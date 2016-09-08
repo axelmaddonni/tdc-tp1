@@ -8,7 +8,7 @@ cantidad = 0
 
 def packet_callback(pkt):
   global fuente, cantidad
-  if ARP in pkt and pkt[ARP].op == 1:  # x.op == 0 sii x es un is at
+  if ARP in pkt and pkt[ARP].op == 2:  # x.op == 2 sii x es un is at
     s = pkt.src
     if s in fuente:
       fuente[s] += 1
