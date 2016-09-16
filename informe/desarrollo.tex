@@ -1,3 +1,30 @@
 \section{Desarrollo}
 
-\PARstart Blah
+\PARstart Como explicamos anteriormente, el trabajo se basará en analizar redes locales capturando paquetes ARP de redes locales y analizandolos utilizando herramientas de la teoría de la información.
+
+Para capturar los paquetes de la red analizada, utilizamos el programa \textsc{Wireshark}. Luego, para postprocesar los datos y computar la inforamación pedida utilizamos la librería de Python \textsc{Scapy}. \textsc{Scapy} es una poderosa herramienta que permite capturar, decodificar, crear y envíar paquetes de manera muy sencilla.
+
+\subsection{Ejercicio 1}
+
+El ejercicio 1 proponía analizar los resultados modelando a los paquetes como una fuente de información muy simple: simplemente distinguir entre paquetes broadcast y paquetes unicast. La fuente consiste en dos símbolos, uno que representa a los paquetes unicast, y otro que representa a los paquetes broadcast.
+
+Esta fuente no nos permitirá conocer muy bien quién es quién en la red, pero nos dará quizás un poco de información sobre lo que está pasando en la red local.
+
+Que la cantidad de mensajes de broadcast sea muy grande, o sea, la información del símbolo que representa a los mensajes broadcast sea muy chica, será lo esperado. Esto se debe a que en una red normal, en la cual podemos escuchar todo lo que está pasando, lo esperable es que los dispositivos se comuniquen unos con otros en vez de estar envíando broadcasts todo el tiempo.
+
+De alguna manera, si vemos pocos paquetes unicast, o sea que la información de este símbolo es muy alta, puede significar dos cosas:
+
+\begin{enumerate}
+  \item No tenemos visibilidad total de la red, por ejemplo porque está switcheada, y entonces vemos solo los paquetes unicast dirigidos a nuestro host.
+  \item No hay comunicación efectiva entre los hosts de la red, porque los paquetes unicast de alguna manera miden cuanta comunicación de un host a otro está sucediendo.
+\end{enumerate}
+
+Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio1.py}.
+
+
+\subsection{Ejercicio 2}
+
+El ejercicio 2 prop
+
+
+Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio2.py}.
