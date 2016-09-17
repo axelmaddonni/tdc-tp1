@@ -24,7 +24,26 @@ Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejer
 
 \subsection{Ejercicio 2}
 
-El ejercicio 2 prop
+El ejercicio 2 proponía que diseñemos una fuente de memoria nula en base a los paquetes ARP, que nos permitiera distinguir a los nodos distinguidos de la red, para alguna definición que demos de nodo distinguido.
 
+Experimentamos con varias fuentes, y terminamos seleccionando que la fuente sea el destino de los paquetes who-has, por las siguientes razones:
 
-Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio2.py}.
+\begin{enumerate}
+  \item Si estamos analizando una red switcheada o muy subdividida en subredes virtuales (VLANs), entonces lo más probable es que solo recibamos paquetes who-has, dado que estos paquetes se envían en modo broadcast.
+    Por esta razón los switches de la red local no los filtran y le llegan a todos los hosts.  Quizás esta diferencia no sea notable en redes inalámbricas, pero en redes cableadas complejas, que generalmente tienen switches, puede hacer una gran diferencia.
+  \item Como justificamos anteriormente, vamos a usar paquetes who-has, ahora bien, la pregunta es porqu\'e el destino de esos paquetes. En este caso la respuesta es más obvia: si un host es el destinatario de más paquetes ARP, entonces es más requerido por el resto de los hosts, entonces es más probable que sea un nodo distinguido, como por ejemplo un router.
+\end{enumerate}
+
+Siguiendo estos simples preceptos, diseñamos nuestra fuente de información S1. Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio2.py}.
+
+\subsection{Grafo de la red}
+
+Para los tres experimentos que realizamos, hicimos el grafo de la red que se desprende de los paquetes ARP enviados a lo largo de la captura.
+
+El grafo fue realizado de la manera más natural. Por cada mensaje who-has capturado, el grafo tendrá una arista. Además, esa arista irá del nodo con IP igual a la IP fuente del who-has al nodo con IP destino del who-has.
+
+Por razones de comodidad, solo mostramos aquellos nodos relevantes, es decir, los que tienen información baja con respecto a la fuente de información que S1.
+
+Además, juntamos en uno a todos los hosts que tienen exactamente el mismo conjunto de aristas adyacentes. Esto se indicara con un [X]: si un nodo tiene [X] significa que ahí condensamos X cantidad de hosts, que tienen todos exactamente la misma conectividad que el nodo representado. 
+
+Además, marcamos con un cuadrado aquellos nodos distinguidos según la fuente S1, es decir, aquellos que tienen menos información que la entropía.
