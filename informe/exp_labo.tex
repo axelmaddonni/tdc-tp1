@@ -1,7 +1,8 @@
 \section{Experimento 2}
 
 El segundo experimento que mostraremos fue realizado en los laboratorios del Departamento de Computación de FCEyN, más especificamente en el laboratorio 2.
-La captura de paquetes duró una hora y se realizó desenchufando el cable ethernet de la computadora 3 del laboratorio 2, y enchufandolo en nuestra propia computadora, de tal manera de poder capturar paquetes en modo promiscuo.
+La captura de paquetes duró una hora y se realizó sobre la red cableada del laboratorio, es decir, sobre Ethernet.
+La modalidad fue desenchufar el cable Ethernet de la computadora 3 del laboratorio 2, y enchufandolo en nuestra propia computadora, de tal manera de poder capturar paquetes en modo promiscuo.
 
 La captura de paquetes se realizó durante la tarde, mientras había aproximadamente 10 personas utilizando las computadoras de ese laboratorio. Las mediciones fueron realizadas con la autorización de uno de los administradores de la red, quien además ayudó a verificar las teorías que extrajimos de los paquetes. Veremos todo esto más adelante.
 
@@ -72,6 +73,7 @@ Resultó que nuestras predicciones fueron muy acertadas. Como predijimos, cada l
 Finalmente, el subgrafo que creíamos que se correspondía con la red Wi-Fi, efectivamente lo hacía. Según el administrador, esa subred corresponde a IPs de un pool dinámico de IPs, que se asignan en el rango de direcciones de 10.2.200.0 a 10.2.201.255 de forma dinámica cada vez que un dispositivo nuevo se conecta a la red. ado que el Wi-Fi de los laboratorios está configurado con un pool dinamico de direcciones, y 10.2.203.254 es el router de la red. Quizás era un poco dificil
 conocer toda esta información solamente con el grafo de conexiones, pero nos parece muy interesante contarlo de todas formas, porque es un patrón recurrente en redes Wi-Fi.
 
-[poner porque las pcs se mandan paquetes unas a otras]
+Además, nos aclaró que el hecho que las PCs de los laboratorios se manden paquetes unas a otras es esperado y tiene variadas causas. Primero, puede ser que dos usuarios esten usando un programa que use la red local, y entonces las computadoras se van a enviar paquetes ARP entre ellas. 
+Otra cosa que sucede, es que las redes de los laboratorios tienen software de control y mantenimiento por temas de seguridad, y sobre todo para hacer que la red sea más fácil de mantener. Además es algo necesario para poder implementar el sistema conocido como Milagro, para poder conectarse a los labos a trav\'es de ssh.
 
-[poner los chabones de gratiotious ARP]
+Por último, el administrador desconocía la razón por la cual había ciertos nodos que lo único que hacían era enviar Gratuitous ARP. Nos parece interesante plantear este interrogante como trabajo futuro.
