@@ -47,3 +47,25 @@ Por razones de comodidad, solo mostramos aquellos nodos relevantes, es decir, lo
 Además, juntamos en uno a todos los hosts que tienen exactamente el mismo conjunto de aristas adyacentes. Esto se indicara con un [X]: si un nodo tiene [X] significa que ahí condensamos X cantidad de hosts, que tienen todos exactamente la misma conectividad que el nodo representado. 
 
 Además, marcamos con un cuadrado aquellos nodos distinguidos según la fuente S1, es decir, aquellos que tienen menos información que la entropía.
+
+
+\subsection{Conceptos generales}
+
+\subsubsection{Gratuitous ARP}
+
+En todos los experimentos apareció un tipo de paquete ARP llamado Gratuitous ARP, con lo cual nos parece mejor introducirlo al principio para dejar en claro qu\'e es y por qu\'e aparece en todos los experimentos.
+
+Gratuitous ARP puede significar tanto un reply (is-at) como un request (who-has). Gratuito en este caso quiere decir que un request o un reply no es normalmente requerido de acuerdo con la especificacion de ARP (RFC 826) \cite{arp}, pero puede ser usado en algunos casos.
+Un request ARP gratuito es un paquete donde la IP source y destination están ambas seteadas a la IP del host que envía el paquete. Además, la MAC destino es la dirección de broadcast \texttt{ff:ff:ff:ff:ff:ff}. Ordinariamente, no habrá respuesta para tal request.
+
+Los ARP gratuitos tienen varias utilidades:
+
+\begin{enumerate}
+  \item Pueden ayudar a detectar conflictos de IP. Si un host recibe un paquete ARP que contiene una IP source que coincide con la suya, sabe que hay un conflicto.
+  \item Ayuda a actualizar las tablas ARP de los hosts de la red.
+  \item Cada vez que una interfaz IP se prende, el driver de la interfaz típicamente envía paquetes ARP gratuitos para precargar las tablas ARP de todos los hosts. Por eso, si un host envía muchos paquetes ARP gratuitos, podemos inferir que algo malo está sucediendo con \'el, por ejemplo que se está reiniciando o que su interfaz IP se reinicia continuamente porque no puede iniciarse correctamente.
+\end{enumerate}
+
+
+\subsubsection{Dirección 169.254.255.255}
+[eg an address you end up picking yourself because DHCP didn't work usually picked using some arp to figure out if it belongs to someone else]
