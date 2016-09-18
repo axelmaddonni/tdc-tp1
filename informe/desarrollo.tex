@@ -68,4 +68,10 @@ Los ARP gratuitos tienen varias utilidades:
 
 
 \subsubsection{Dirección 169.254.255.255}
-[eg an address you end up picking yourself because DHCP didn't work usually picked using some arp to figure out if it belongs to someone else]
+
+La dirección 169.254.255.255 apareció en todos los experimentos donde hay una red Wi-Fi, por está razón nos pareció pertinente introducirla aquí brevemente. Esta dirección es una dirección por default que se asigna a si mismo un dispositivo porque DHCP no funcionó correctamente.
+
+Usualmente le envía un mensaje ARP a esa dirección para saber si ya fue asignado a alguien en la red. Por está razón a veces está IP aparecerá en las redes Wi-Fi, y significará que algún dispositivo falló en conectarse y se asignó esa IP. Generalmente, el problema se soluciona automaticamente al poco tiempo y al dispositivo se le asigna su ip definitiva.
+
+
+
