@@ -6,15 +6,15 @@ Para resumir algunos puntos que fuimos dando a lo largo del trabajo para tener e
 
 \begin{enumerate}
   \item Si la fuente S tiene una entropía muy alta, quiere decir que la información del símbolo de los paquetes broadcast es muy similar a la información de los paquetes unicast. Esto significará en general que no tenemos visibilidad total de la red, o que el overhead de los paquetes de control es mucho, y no hay comunicación efectiva entre los hosts.
-  \item En general los nodos con información menor con respecto a la fuente S1 son los rounters o Default Gateways de la red.
+  \item En general los nodos con información menor con respecto a la fuente S1 son los routers o Default Gateways de la red.
   \item Las redes Wi-Fi son bastante simples y se asemejan a un grafo estrella, si no se tiene en cuenta la IP excepcional 169.254.255.255 que fue explicada en detalle anteriormente.
 \end{enumerate}
 
 Si queremos comparar las redes Wi-Fi y la redes ethernet, podemos decir que las primeras (en general) son más fáciles de analizar dado que la visibilidad que tenemos de los paquetes de la red es total, y por ejemplo la fuente S se va a comportar de la forma que esperamos.
 
-Por otro lado, las redes Ethernet, si estan fuertemente switcheadas o subneteadas nos van a dar mas sesgadas para el lado de los paquetes broadcast, dato que también podemos obtener de la fuente S1.
+Por otro lado, las redes Ethernet, si estan fuertemente switcheadas o subneteadas nos van a dar más sesgadas para el lado de los paquetes broadcast, dato que también podemos obtener de la fuente S1.
 
-Fuera de eso, la diferencia no es muy grande. Es importante notar que fue vital nuestra eleccion de fuente S1 en este caso, dado que si hubieramos elegido como fuente los paqutes is-at (unicast), la fuente hubiera dado muy mal para los casos Ethernet.
+Fuera de eso, la diferencia no es muy grande. Es importante notar que fue vital nuestra eleccion de fuente S1 en este caso, dado que si hubiéramos elegido como fuente los paqutes is-at (unicast), la fuente hubiera dado muy mal para los casos Ethernet.
 
 
 En cuanto al tamaño de las redes, la diferencia en la fuente S es casi nula. Sin embargo, en la fuente S1 se observa que la diferencia de información entre los nodos distinguidos y los nodos no distinguidos tiende a ser mayor en las redes más grandes.
@@ -22,14 +22,14 @@ En cuanto al tamaño de las redes, la diferencia en la fuente S es casi nula. Si
 La explicación de este fenómeno es realmente simple. A más nodos tiene una red, más nodos van a estar accediendo al router (o al nodo distinguido, sea lo que sea), con lo que va a haber muchos request ARP (who-has) a ese nodo, con lo que la información va a ser muy pequeña. Por otro lado, en redes más pequeñas, la información de los nodos distinguidos también va a ser pequeña, pero menos, dado que la cantidad de requests ARP que recibe va a ser menor en proporción.
 
 
-Comparar la información de los símbolos de la fuente S1 con la entropía de la fuente S1 fue vital para encontrar los nodos distinguidos. Esto, como explicamos en la introducción, se justifica teóricamente en que los nodos distinguidos van a ser más comunes como símbolos de la fuente S1 que el resto, con lo cual su información va a ser menor. En particular, un muy buen umbral que se puede elegir para decidir si un símbolo tiene menor información de la esperada es la entropía, dado
+Comparar la información de los símbolos de la fuente S1 con la entropía de la fuente S1 fue vital para encontrar los nodos distinguidos. Esto, como explicamos en la introducción, se justifica teóricamente dado que los nodos distinguidos van a ser más comunes como símbolos de la fuente S1 que el resto, con lo cual su información va a ser menor. En particular, un muy buen umbral que se puede elegir para decidir si un símbolo tiene menor información de la esperada es la entropía, dado
 que la entropía es literalmente la esperanza de la información.
 
 Una cosa importante para resaltar es que esperaremos que a más nodos haya en nuestra red, más grande sea la entropía. Esto se debe a que si hay muchos hosts en la red, esperamos que sean hosts comunes tipo PC, que en general reciben pocas requests ARP, con lo cual la información de su símbolo asociado va a ser muy alta, provocando que la esperanza de la información (es decir, la entropía), aumente. Por lo tanto, yendo hacia el lado contrario del argumento de recién, esperamos que
-si la entropía es alta, entonces la cantidad de nodos no distinguidos sea muy alta.
+si la entropía es alta, entonces la cantidad de nodos no distinguidos sea mayor.
 Esto es importante tenerlo en cuenta porque es un dato muy importante que podemos obtener de la red con solo saber la entropía de la fuente S1.
 
-Por último, en general observamos que a más alta es la entropía más nodos distinguidos hay. Esto tiene dos explicaciones posibles, que se complementan una con la otra.
+Por último, en general observamos que cuanto más alta es la entropía más nodos distinguidos hay. Esto tiene dos explicaciones posibles, que se complementan una con la otra.
 Primero, la explicación numérica: como para nosotros un nodo es distinguido si la información de su símbolo asociado es menor que la entropía, si la entropía es más grande entonces es más probable (por probabilidad) que un símbolo cualquiera tenga menor información que el valor de la entropía.
 Segundo, por un tema funcional, si en una red hay muchos nodos, es probable que esa red tenga algún tipo de subestructura y no tenga un único router adentro, si no que tenga varios. Por esa razón, si la entropía es más grande, esperamos que haya más nodos en general, por lo tanto más routers, luego más nodos distinguidos.
 

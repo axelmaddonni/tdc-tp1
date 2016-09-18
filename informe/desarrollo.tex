@@ -1,8 +1,8 @@
 \section{Desarrollo}
 
-\PARstart Como explicamos anteriormente, el trabajo se basará en analizar redes locales capturando paquetes ARP de redes locales y analizandolos utilizando herramientas de la teoría de la información.
+\PARstart Como explicamos anteriormente, el trabajo se basará en analizar redes locales capturando paquetes ARP de las mismas y analizándolos utilizando herramientas de la teoría de la información.
 
-Para capturar los paquetes de la red analizada, utilizamos el programa \textsc{Wireshark}. Luego, para postprocesar los datos y computar la inforamación pedida utilizamos la librería de Python \textsc{Scapy}. \textsc{Scapy} es una poderosa herramienta que permite capturar, decodificar, crear y envíar paquetes de manera muy sencilla.
+Para capturar los paquetes de la red analizada, utilizamos el programa \textsc{Wireshark}. Luego, para postprocesar los datos y computar la inforamación pedida utilizamos la librería de Python \textsc{Scapy}. \textsc{Scapy} es una poderosa herramienta que permite capturar, decodificar, crear y enviar paquetes de manera muy sencilla.
 
 \subsection{Ejercicio 1}
 
@@ -10,7 +10,7 @@ El ejercicio 1 proponía analizar los resultados modelando a los paquetes como u
 
 Esta fuente no nos permitirá conocer muy bien quién es quién en la red, pero nos dará quizás un poco de información sobre lo que está pasando en la red local.
 
-Que la cantidad de mensajes de broadcast sea muy grande, o sea, la información del símbolo que representa a los mensajes broadcast sea muy chica, será lo esperado. Esto se debe a que en una red normal, en la cual podemos escuchar todo lo que está pasando, lo esperable es que los dispositivos se comuniquen unos con otros en vez de estar envíando broadcasts todo el tiempo.
+Lo esperado será que la cantidad de mensajes de broadcast sea menor que la cantidad de unicast, o sea, la información del símbolo que representa a los mensajes broadcast sea mayor. Esto se debe a que en una red normal, en la cual podemos escuchar todo lo que está pasando, lo esperable es que los dispositivos se comuniquen unos con otros en vez de estar enviando broadcasts todo el tiempo.
 
 De alguna manera, si vemos pocos paquetes unicast, o sea que la información de este símbolo es muy alta, puede significar dos cosas:
 
@@ -34,15 +34,15 @@ Experimentamos con varias fuentes, y terminamos seleccionando que la fuente sea 
   \item Como justificamos anteriormente, vamos a usar paquetes who-has, ahora bien, la pregunta es porqu\'e el destino de esos paquetes. En este caso la respuesta es más obvia: si un host es el destinatario de más paquetes ARP, entonces es más requerido por el resto de los hosts, entonces es más probable que sea un nodo distinguido, como por ejemplo un router.
 \end{enumerate}
 
-Siguiendo estos simples preceptos, diseñamos nuestra fuente de información S1. Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio2.py}.
+Siguiendo estos preceptos, diseñamos nuestra fuente de información S1. Nuestra implementación de este ejercicio puede verse en el archivo \texttt{ejercicio2.py}.
 
 \subsection{Grafo de la red}
 
 Para los tres experimentos que realizamos, hicimos el grafo de la red que se desprende de los paquetes ARP enviados a lo largo de la captura.
 
-El grafo fue realizado de la manera más natural. Por cada mensaje who-has capturado, el grafo tendrá una arista. Además, esa arista irá del nodo con IP igual a la IP fuente del who-has al nodo con IP destino del who-has.
+El grafo fue realizado de la siguiente manera: por cada mensaje who-has capturado, el grafo tendrá una arista. Además, esa arista irá del nodo con IP igual a la IP fuente del who-has al nodo con IP destino del who-has.
 
-Por razones de comodidad, solo mostramos aquellos nodos relevantes, es decir, los que tienen información baja con respecto a la fuente de información que S1.
+Por razones de comodidad, solo mostramos aquellos nodos relevantes, es decir, los que tienen información baja con respecto a la fuente de información S1.
 
 Además, juntamos en uno a todos los hosts que tienen exactamente el mismo conjunto de aristas adyacentes. Esto se indicara con un [X]: si un nodo tiene [X] significa que ahí condensamos X cantidad de hosts, que tienen todos exactamente la misma conectividad que el nodo representado. 
 
@@ -53,7 +53,7 @@ Además, marcamos con un cuadrado aquellos nodos distinguidos según la fuente S
 
 \subsubsection{Gratuitous ARP}
 
-En todos los experimentos apareció un tipo de paquete ARP llamado Gratuitous ARP, con lo cual nos parece mejor introducirlo al principio para dejar en claro qu\'e es y por qu\'e aparece en todos los experimentos.
+En todos los experimentos apareció un tipo de paquete ARP llamado Gratuitous ARP, con lo cual nos parece mejor introducirlo al principio para dejar en claro qu\'e es y por qu\'e aparece.
 
 Gratuitous ARP puede significar tanto un reply (is-at) como un request (who-has). Gratuito en este caso quiere decir que un request o un reply no es normalmente requerido de acuerdo con la especificacion de ARP (RFC 826) \cite{arp}, pero puede ser usado en algunos casos.
 Un request ARP gratuito es un paquete donde la IP source y destination están ambas seteadas a la IP del host que envía el paquete. Además, la MAC destino es la dirección de broadcast \texttt{ff:ff:ff:ff:ff:ff}. Ordinariamente, no habrá respuesta para tal request.
@@ -71,7 +71,7 @@ Los ARP gratuitos tienen varias utilidades:
 
 La dirección 169.254.255.255 apareció en todos los experimentos donde hay una red Wi-Fi, por está razón nos pareció pertinente introducirla aquí brevemente. Esta dirección es una dirección por default que se asigna a si mismo un dispositivo porque DHCP no funcionó correctamente.
 
-Usualmente le envía un mensaje ARP a esa dirección para saber si ya fue asignado a alguien en la red. Por está razón a veces está IP aparecerá en las redes Wi-Fi, y significará que algún dispositivo falló en conectarse y se asignó esa IP. Generalmente, el problema se soluciona automaticamente al poco tiempo y al dispositivo se le asigna su ip definitiva.
+Usualmente le envía un mensaje ARP a esa dirección para saber si ya fue asignado a alguien en la red. Por esta razón a veces esta IP aparecerá en las redes Wi-Fi, y significará que algún dispositivo falló al conectarse y se asignó esa IP. Generalmente, el problema se soluciona automáticamente al poco tiempo y al dispositivo se le asigna su ip definitiva.
 
 
 
