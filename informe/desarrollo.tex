@@ -2,7 +2,7 @@
 
 \PARstart Como explicamos anteriormente, el trabajo se basará en analizar redes locales capturando paquetes ARP de las mismas y analizándolos utilizando herramientas de la teoría de la información.
 
-Para capturar los paquetes de la red analizada, utilizamos el programa \textsc{Wireshark}. Luego, para postprocesar los datos y computar la inforamación pedida utilizamos la librería de Python \textsc{Scapy}. \textsc{Scapy} es una poderosa herramienta que permite capturar, decodificar, crear y enviar paquetes de manera muy sencilla.
+Para capturar los paquetes de la red analizada, utilizamos el programa \textsc{Wireshark}. Luego, para post-procesar los datos y computar la información pedida utilizamos la librería de Python \textsc{Scapy}. \textsc{Scapy} es una poderosa herramienta que permite capturar, decodificar, crear y enviar paquetes de manera muy sencilla.
 
 \subsection{Ejercicio 1}
 
@@ -30,7 +30,7 @@ Experimentamos con varias fuentes, y terminamos seleccionando que la fuente sea 
 
 \begin{enumerate}
   \item Si estamos analizando una red switcheada o muy subdividida en subredes virtuales (VLANs), entonces lo más probable es que solo recibamos paquetes who-has, dado que estos paquetes se envían en modo broadcast.
-    Por esta razón los switches de la red local no los filtran y le llegan a todos los hosts.  Quizás esta diferencia no sea notable en redes inalámbricas, pero en redes cableadas complejas, que generalmente tienen switches, puede hacer una gran diferencia.
+    Por esta razón los switches de la red local no los filtran y le llegan a todos los hosts. Quizás esta diferencia no sea notable en redes inalámbricas, pero en redes cableadas complejas, que generalmente tienen switches, puede hacer una gran diferencia.
   \item Como justificamos anteriormente, vamos a usar paquetes who-has, ahora bien, la pregunta es porqu\'e el destino de esos paquetes. En este caso la respuesta es más obvia: si un host es el destinatario de más paquetes ARP, entonces es más requerido por el resto de los hosts, entonces es más probable que sea un nodo distinguido, como por ejemplo un router.
 \end{enumerate}
 
@@ -55,7 +55,7 @@ Además, marcamos con un cuadrado aquellos nodos distinguidos según la fuente S
 
 En todos los experimentos apareció un tipo de paquete ARP llamado Gratuitous ARP, con lo cual nos parece mejor introducirlo al principio para dejar en claro qu\'e es y por qu\'e aparece.
 
-Gratuitous ARP puede significar tanto un reply (is-at) como un request (who-has). Gratuito en este caso quiere decir que un request o un reply no es normalmente requerido de acuerdo con la especificacion de ARP (RFC 826) \cite{arp}, pero puede ser usado en algunos casos.
+Gratuitous ARP puede significar tanto un reply (is-at) como un request (who-has). Gratuito en este caso quiere decir que un request o un reply no es normalmente requerido de acuerdo con la especificación de ARP (RFC 826) \cite{arp}, pero puede ser usado en algunos casos.
 Un request ARP gratuito es un paquete donde la IP source y destination están ambas seteadas a la IP del host que envía el paquete. Además, la MAC destino es la dirección de broadcast \texttt{ff:ff:ff:ff:ff:ff}. Ordinariamente, no habrá respuesta para tal request.
 
 Los ARP gratuitos tienen varias utilidades:
@@ -69,9 +69,11 @@ Los ARP gratuitos tienen varias utilidades:
 
 \subsubsection{Dirección 169.254.255.255}
 
-La dirección 169.254.255.255 apareció en todos los experimentos donde hay una red Wi-Fi, por está razón nos pareció pertinente introducirla aquí brevemente. Esta dirección es una dirección por default que se asigna a si mismo un dispositivo porque DHCP no funcionó correctamente.
+La dirección 169.254.255.255 apareció en todos los experimentos donde hay una red Wi-Fi, por está razón nos pareció pertinente introducirla aquí brevemente. Esta dirección es una dirección por defecto que se asigna a si mismo un dispositivo porque DHCP no funcionó correctamente.
 
-Usualmente le envía un mensaje ARP a esa dirección para saber si ya fue asignado a alguien en la red. Por esta razón a veces esta IP aparecerá en las redes Wi-Fi, y significará que algún dispositivo falló al conectarse y se asignó esa IP. Generalmente, el problema se soluciona automáticamente al poco tiempo y al dispositivo se le asigna su ip definitiva.
+DHCP \cite{dhcp} es un protocolo de red estandarizado usado en redes IP. El protocolo es controlado por un servidor DHCP que se ocupa de distribuir dinámicamente los parámetros de configuración de la red, como por ejemplo, direcciones IP.
 
+
+Usualmente le envía un mensaje ARP a esa dirección para saber si ya fue asignado a alguien en la red. Por esta razón a veces esta IP aparecerá en las redes Wi-Fi, y significará que algún dispositivo falló al conectarse y se asignó esa IP. Generalmente, el problema se soluciona automáticamente al poco tiempo y al dispositivo se le asigna su IP definitiva.
 
 
