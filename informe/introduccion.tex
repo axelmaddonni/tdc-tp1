@@ -4,8 +4,8 @@
 
 La explicaci\'on de las fuentes utilizadas vendr\'a m\'as adelante, pero es pertinente presentar el formato de los paquetes ARP. El protocolo de resoluci\'on de direcciones (Address Resolution Protocol) \cite{arp} es un protocolo usado para la resoluci\'on de direcciones de la capa de red a direcciones de la capa de enlace (usualmente MAC), lo que es una funci\'on cr\'itica en redes de m\'ultiple acceso.
 
-Un paquete ARP tiene muchas partes, pero la que m\'as nos interesa es el campo OPER, o sea el campo de Operaci\'on, que nos indica qu\'e funci\'on cumple ese paquete. 
-Los distintos valores de OPER en paquete ARP son is-at y who-has. 
+Un paquete ARP tiene muchas partes, pero la que m\'as nos interesa es el campo \texttt{OPER}, o sea el campo de Operaci\'on, que nos indica qu\'e funci\'on cumple ese paquete. 
+Los distintos valores de \texttt{OPER} en paquete ARP son is-at y who-has. 
 Un paquete who-has es un paquete broadcast en el que una computadora pregunta al resto de la red qui\'en es la que tiene una direcci\'on de capa de red (generalmente IP) dada.
 La respuesta a ese paquete es un paquete is-at, que es un paquete unicast, enviado desde la computadora con la direcci\'on de capa de red requerida hasta la computadora que emiti\'o el who-has.
 
